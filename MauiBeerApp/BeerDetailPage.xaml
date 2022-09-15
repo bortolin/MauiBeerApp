@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PunkApi;assembly=PunkApi"
+             x:Class="MauiBeerApp.BeerDetailPage"
+             x:DataType="local:Beer"
+             Title="BeerDetailPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+            <Image x:Name="BeerImage"
+                Source="{Binding ImageUrl}"
+                MaximumHeightRequest="400"
+                MinimumHeightRequest="200"
+                HorizontalOptions="Center" />
+            <Label x:Name="BeerName"
+                Text="{Binding Name}"
+                FontSize="32"
+                HorizontalOptions="Center" />
+            <Label x:Name="BeerAbv"
+                Text="{Binding Abv,StringFormat='{0:F2}% alcohol'}"
+                FontSize="20"
+                HorizontalOptions="Center" />
+            <Label
+                HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontSize="14" Text="First brewed at "></Span>
+                        <Span FontSize="14" Text="{Binding FirstBrewed}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label x:Name="BeerDescription"
+                Text="{Binding Description}"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            <Label Text="Ingredients" FontSize="Small"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+            <Label Text="{Binding ingredients}"
+                FontSize="18"
+                   FontAttributes="Italic"
+                HorizontalOptions="Center" />
+            <Label Text="Food pairing" FontSize="Small"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+            <Label x:Name="FoodPairing"
+                Text="{Binding FoodPairing, Converter={StaticResource Key=ListOfStringConverter}}"
+                FontSize="18"
+                   FontAttributes="Italic"
+                HorizontalOptions="Center" />
+            <Label Text="Brewers Tips" FontSize="Small"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+            <Label x:Name="BrewersTips"
+                Text="{Binding BrewersTips}"
+                FontSize="18"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
