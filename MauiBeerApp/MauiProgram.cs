@@ -16,7 +16,8 @@ public static class MauiProgram
 			.Services.AddTransient<PunkApi.PunkApiClient>()
 			.AddTransient<BeersPage>()
 			.AddTransient<MainPage>()
-			.AddTransient<MainPageViewModel>();
+			.AddTransient<MainPageViewModel>()
+			.AddTransient<BeersPageViewModel>();
 
         return builder.Build();
 	}

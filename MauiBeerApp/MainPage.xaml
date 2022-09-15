@@ -35,7 +35,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        Text="{Binding CurrentBeer.Abv}"
+                        Text="{Binding CurrentBeer.Abv,StringFormat='{0:F2}% alcohol'}"
                         FontSize="20"
                         HorizontalOptions="Center" />
                     <Label Text="{Binding CurrentBeer.Description}"

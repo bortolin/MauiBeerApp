@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -13,11 +14,21 @@ namespace MauiBeerApp
         private object currentBeerImageUrl;
         private bool isRefreshing;
 
+        public Beer CurrentBeer { get { return currentBeer; } set { SetProperty(ref currentBeer, value); } }
+        public object CurrentBeerImageUrl { get { return currentBeerImageUrl; } set { SetProperty(ref currentBeerImageUrl, value); } }
+        public bool IsRefreshing { get { return isRefreshing; } set { SetProperty(ref isRefreshing, value); } }
+
         public MainPageViewModel(PunkApiClient punkApiClient)
 		{
             this.punkApiClient = punkApiClient;
+        }
 
-            DiscoverBeer = new Command(
+        public async Task Init()
+        {
+            await LoadData();
+        }
+
+        public ICommand DiscoverBeer => new Command(
             execute: async () =>
             {
                 await LoadData();
@@ -27,23 +38,11 @@ namespace MauiBeerApp
                 return !IsRefreshing;
             });
 
-            OpenBeerDetail = new Command(
+        public ICommand OpenBeerDetail => new Command(
             execute: async () =>
             {
                 await Shell.Current.Navigation.PushAsync(new BeerDetailPage(CurrentBeer));
             });
-            
-        }
-
-        public Beer CurrentBeer { get { return currentBeer;  } set { SetProperty(ref currentBeer, value); } }
-
-        public object CurrentBeerImageUrl { get { return currentBeerImageUrl; } set { SetProperty(ref currentBeerImageUrl, value);} }
-
-        public bool IsRefreshing { get { return isRefreshing; } set { SetProperty(ref isRefreshing, value); } }
-
-        public ICommand DiscoverBeer { private set; get; }
-
-        public ICommand OpenBeerDetail { private set; get; }
 
         private async Task LoadData()
         {
