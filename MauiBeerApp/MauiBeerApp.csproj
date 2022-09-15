@@ -47,24 +47,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\PunkApi\PunkApi.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="BeersPage.xaml">
-	    <SubType></SubType>
-	  </MauiXaml>
-	  <MauiXaml Update="BeerDetailPage.xaml">
-	    <SubType></SubType>
-	  </MauiXaml>
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Helpers\" />
-	  <None Remove="Converters\" />
-	  <None Remove="Resources\Splash\" />
-	  <None Remove="Resources\AppIcon\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Helpers\" />
-	  <Folder Include="Converters\" />
-	  <Folder Include="Resources\Splash\" />
-	  <Folder Include="Resources\AppIcon\" />
-	</ItemGroup>
+	
 </Project>
