@@ -15,7 +15,7 @@
 		<ApplicationTitle>MauiBeerApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mauibeerapp</ApplicationId>
+		<ApplicationId>com.mbortolin.mauibeerapp</ApplicationId>
 		<ApplicationIdGuid>B0605F2F-8925-48F6-AC91-8A65AE4F9C61</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -32,11 +32,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
 	  <EnableCodeSigning>false</EnableCodeSigning>
+	  <CodesignKey>Apple Development: Marco Bortolin (Q4K5HXR3MW)</CodesignKey>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#52D681" />
-		<MauiSplashScreen Include="Resources\Splash\beerlogo.svg" Color="#52D681" BaseSize="200,200" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#52D681" BaseSize="50,50" />
+		<MauiSplashScreen Include="Resources\Splash\beerlogo.svg" Color="#52D681" BaseSize="50,50" />
 
 		<MauiImage Include="Resources\Images\*" />
 		<MauiFont Include="Resources\Fonts\*" />

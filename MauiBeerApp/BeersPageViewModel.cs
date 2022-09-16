@@ -67,7 +67,7 @@ namespace MauiBeerApp
             IsLoading = false;
         }, () => { return (!IsLoading && !allLoaded); });
 
-        public ICommand SelectedBeerChanged => new Command<Beer>(async (beer) =>
+        public ICommand OpenBeerDetails => new Command<Beer>(async (beer) =>
         {
             await Shell.Current.Navigation.PushAsync(new BeerDetailPage(beer));
         });

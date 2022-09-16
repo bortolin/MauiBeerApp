@@ -5,6 +5,7 @@
              xmlns:local="using:MauiBeerApp"
              x:Class="MauiBeerApp.BeersPage"
              x:DataType="local:BeersPageViewModel"
+             x:Name="CurrentPage"
              Title="BeersPage">
    <Grid>
        <Grid.RowDefinitions>
@@ -16,14 +17,14 @@
         <ActivityIndicator Grid.Row="0"
                            IsRunning="{Binding IsLoading}"
                            IsVisible="{Binding IsLoading}" />
-        <SearchBar x:Name="searchBar" Grid.Row="1"
+        <SearchBar x:Name="searchBar" Grid.Row="1" 
                    Placeholder="Serach Beer Name ....."
                    SearchCommand="{Binding PerformSearch}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" FontSize="20" HeightRequest="80" />
         <CollectionView x:Name="beerCollection" Grid.Row="2"
                         ItemsSource="{Binding BeersList}"
                         RemainingItemsThreshold="10"
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreData}" SelectionMode="Single"  SelectionChangedCommand="{Binding SelectedBeerChanged}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference beerCollection}}">
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreData}" Margin="0,20,0,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
@@ -39,11 +40,13 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"
+                            <ImageButton Grid.Column="0"
                                    Grid.Row="0"
                                    Source="{Binding ImageUrl}"
                                    MaximumWidthRequest="80"
-                                   MaximumHeightRequest="100" />
+                                   MaximumHeightRequest="100"
+                                   Command="{Binding Source={x:Reference CurrentPage}, Path=BindingContext.OpenBeerDetails}"
+                                   CommandParameter="{Binding}" />
                             <Label Grid.Column="1"
                                    Grid.Row="0"
                                    FontSize="18"

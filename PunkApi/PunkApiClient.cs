@@ -8,17 +8,22 @@ using System.Linq;
 
 namespace PunkApi
 {
+    /// <summary>
+    /// Api client for https://api.punkapi.com/v2/
+    /// </summary>
 	public class PunkApiClient
 	{
         private JsonSerializerOptions jsonOptions;
 
         public PunkApiClient()
 		{
-            jsonOptions = new JsonSerializerOptions{
-                                    PropertyNameCaseInsensitive = true
-                                };
+            jsonOptions = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true };
         }
 
+        /// <summary>
+        /// Get random beer 
+        /// </summary>
+        /// <returns>Beer</returns>
 		public async Task<Beer> GetRandomBeerAsync()
 		{
             using var httpClient = new HttpClient();
@@ -33,6 +38,12 @@ namespace PunkApi
             return beers.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Get all beer with pagination
+        /// </summary>
+        /// <param name="page">Number of the page</param>
+        /// <param name="pageSize">Number of record per page</param>
+        /// <returns>List of Beers</returns>
         public async Task<IEnumerable<Beer>> GetAllBeersAsync(int page, int pageSize)
         {
             using var httpClient = new HttpClient();
@@ -41,15 +52,17 @@ namespace PunkApi
             response.EnsureSuccessStatusCode();
 
             using var contentStream = await response.Content.ReadAsStreamAsync();
-            //var buffer = await response.Content.ReadAsStringAsync();
 
             var result =  await JsonSerializer.DeserializeAsync<IEnumerable<Beer>>(contentStream, jsonOptions);
 
-
-            
             return result;
         }
 
+        /// <summary>
+        /// Search beers by name
+        /// </summary>
+        /// <param name="findName">Search string</param>
+        /// <returns>Lits of Beers or empty list if no matched</returns>
         public async Task<IEnumerable<Beer>> SerachBeersByNameAsync(string findName)
         {
             using var httpClient = new HttpClient();
@@ -58,11 +71,8 @@ namespace PunkApi
             response.EnsureSuccessStatusCode();
 
             using var contentStream = await response.Content.ReadAsStreamAsync();
-            //var buffer = await response.Content.ReadAsStringAsync();
 
             var result = await JsonSerializer.DeserializeAsync<IEnumerable<Beer>>(contentStream, jsonOptions);
-
-
 
             return result;
         }

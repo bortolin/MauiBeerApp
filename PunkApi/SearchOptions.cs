@@ -5,6 +5,10 @@ using System.Text;
 
 namespace PunkApi
 {
+
+    /// <summary>
+    /// Search options for build query string parameters
+    /// </summary>
 	public class SearchOptions
 	{
 		/*
@@ -47,6 +51,10 @@ namespace PunkApi
 
         public IEnumerable<int> Ids { get; set; }
 
+        /// <summary>
+        /// Generate query string from options
+        /// </summary>
+        /// <returns>Query string es. abvgt=3&ibu_lt=2</returns>
         public string ToQueryString()
         {
             List<string> searchParams = new List<string>();

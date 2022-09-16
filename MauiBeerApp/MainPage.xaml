@@ -4,19 +4,16 @@
              xmlns:local="using:MauiBeerApp"
              x:Class="MauiBeerApp.MainPage"
              x:DataType="local:MainPageViewModel">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
-        </Grid.RowDefinitions>
-        <RefreshView Grid.Row="0"
+        <RefreshView 
                      Command="{Binding DiscoverBeer}"
                      IsRefreshing="{Binding IsRefreshing}"
-                     IsEnabled="{OnPlatform false, iOS=true, Android=true}">
+                     IsEnabled="{OnPlatform false, iOS=true, Android=false}">
             <ScrollView>
                 <VerticalStackLayout
                     Spacing="25"
                     Padding="30,0"
+                    MinimumWidthRequest="400"
+                    MinimumHeightRequest="800"
                     VerticalOptions="Center">
                     <Image Source="{Binding CurrentBeerImageUrl}"
                         MinimumHeightRequest="200"
@@ -41,14 +38,14 @@
                     <Label Text="{Binding CurrentBeer.Description}"
                         FontSize="18"
                         HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </ScrollView>
-        </RefreshView>
-        <Button Grid.Row="1"
+                <Button 
                 IsVisible="{OnPlatform true, iOS=false, Android=false}"
                 Text="Discover another beer"
                 Command="{Binding DiscoverBeer}"
                 HorizontalOptions="Center"
                 Margin="0,0,0,20" />
-    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+        
 </ContentPage>

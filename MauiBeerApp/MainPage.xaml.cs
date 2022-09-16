@@ -32,6 +32,52 @@ public partial class MainPage : ContentPage
             await viewModel.Init();
             firstLoad = false;
         }
+#if IOS || ANDROID
+        ToggleShake();
+#endif
         base.OnAppearing();
     }
+
+    protected override void OnDisappearing()
+    {
+#if IOS || ANDROID
+        ToggleShake();
+#endif
+        base.OnDisappearing();
+    }
+
+#if IOS || ANDROID
+    private void ToggleShake()
+    {
+        if (Accelerometer.Default.IsSupported)
+        {
+            if (!Accelerometer.Default.IsMonitoring)
+            {
+                // Turn on compass
+                Accelerometer.Default.ShakeDetected += Accelerometer_ShakeDetected;
+                //Accelerometer.Default.ReadingChanged += Default_ReadingChanged;
+                Accelerometer.Default.Start(SensorSpeed.Game);
+            }
+            else
+            {
+                // Turn off compass
+                Accelerometer.Default.Stop();
+                Accelerometer.Default.ShakeDetected -= Accelerometer_ShakeDetected;
+                //Accelerometer.Default.ReadingChanged -= Default_ReadingChanged;
+            }
+        }
+    }
+
+    //private void Default_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
+    //{
+    //    if (e.Reading.Acceleration.X > 0.2)
+    //        viewModel.DiscoverBeer.Execute(null);
+    //}
+
+    private void Accelerometer_ShakeDetected(object sender, EventArgs e)
+    {
+        viewModel.DiscoverBeer.Execute(null);
+    }
+#endif
+
 }

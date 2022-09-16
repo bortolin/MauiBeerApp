@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace PunkApi
 {
+    /// <summary>
+    /// Beer entity
+    /// </summary>
 	public class Beer
 	{
 		public Beer() {}
